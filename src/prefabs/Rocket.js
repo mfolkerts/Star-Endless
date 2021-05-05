@@ -5,43 +5,47 @@ class Rocket extends Phaser.GameObjects.Sprite {
   
       // add object to existing scene
       scene.add.existing(this);
-      this.isFiring = false;
       this.moveSpeed = 6;
       this.sfxRocket = scene.sound.add('sfx_rocket'); // add rocket sfx
       this.sfxmovement = scene.sound.add('sfx_select');
+      this.anims.create({
+        key: 'fireball',
+        frames: this.anims.generateFrameNumbers('meteor', { start: 0, end: 3, first: 0}),
+        frameRate: 8,
+        repeat: -1
+    });
+    this.anims.play('fireball');
     }
 
     update() {
         // left/right movement
-        if(!this.isFiring) {
+        
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
-                this.sfxmovement.play();  // play sfx
+                
                 
             } else if (keyRIGHT.isDown && this.x <= game.config.width -
             borderUISize - this.width) {
                 this.x += this.moveSpeed;
-                this.sfxmovement.play();  // play sfx
+                
                 
             }
-        }
-        // fire button
-        if (Phaser.Input.Keyboard.JustDown(keyF) && !this.isFiring) {
-            this.isFiring = true;
-            this.sfxRocket.play();  // play sfx
-        }
-        // if fired, move up
-        if(this.isFiring && this.y >= borderUISize * 2 + borderPadding) {
-            this.y -= this.moveSpeed;
-        }
-        // reset on miss
-        if(this.y <= borderUISize * 2 + borderPadding) {
-            this.reset();
-        }
+            if(keyUP.isDown && this.y >= borderUISize + this.height) {
+                this.y -= this.moveSpeed;
+                
+                
+            } else if (keyDOWN.isDown && this.y <= game.config.height -
+            borderUISize - this.height) {
+                this.y += this.moveSpeed;
+                
+                
+            }
+        
+        
     }
-    // reset rocket to "ground"
     reset() {
         this.isFiring = false;
-        this.y = game.config.height- borderUISize - borderPadding;
+        this.y = game.config.height - borderUISize - borderPadding;
     }
+    
   }
