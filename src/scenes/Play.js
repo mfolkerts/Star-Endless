@@ -10,7 +10,7 @@ class Play extends Phaser.Scene {
         this.load.image('super', './assets/ship.png');
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
         //
-        this.load.image('4field', './assets/pixil-layer-background.png');
+        this.load.image('4field', './assets/pixil-layer-Background.png');
         this.load.image('3field', './assets/pixil-layer-nebulas.png');
         this.load.image('2field', './assets/pixil-layer-stars.png');
         this.load.image('1field', './assets/pixil-layer-planets.png');
